@@ -1,11 +1,11 @@
-import usersService from "../service/users.service.js";
+import usersService from "../service/users.service.js"
 
 class UsersController {
     async getAll(req, res) {
-        const users = usersService.getAll()
+        const users = await usersService.getAll()
 
         res.status(200).json({
-            message: "Users lists",
+            message: "Users list",
             data: users
         })
     }
@@ -13,16 +13,16 @@ class UsersController {
     async getById(req, res) {
         const { id } = req.params
 
-        const user = usersService.getById(id)
+        const user = await usersService.getById(id)
 
         res.status(200).json({
-            message: "User founded",
+            message: "User found",
             data: user
         })
     }
 
     async create(req, res) {
-        const newUser = usersService.create(req.body)
+        const newUser = await usersService.create(req.body)
 
         res.status(201).json({
             message: `New user created: ${req.body.name}`,
@@ -33,22 +33,22 @@ class UsersController {
     async update(req, res) {
         const { id } = req.params
 
-        const updateUser = usersService.update(id, req.body)
+        const updatedUser = await usersService.update(id, req.body)
 
         res.status(200).json({
             message: `User updated: ${req.body.name}`,
-            user: updateUser
+            user: updatedUser
         })
     }
 
     async delete(req, res) {
         const { id } = req.params
 
-        const deleteUser = usersService.delete(id)
+        const deletedUser = await usersService.delete(id)
 
-        res.status(204).json({
-            message: `User deleted: ${req.body.name}`,
-            user: deleteUser
+        res.status(200).json({
+            message: `User deleted`,
+            user: deletedUser
         })
     }
 }
